@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>futurenature</title>
+    <style>
+        body {
+            font-family: 'Bodoni', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fbf9f6;
+            color: #212427;
+            font-size: 16px;
+        }
+
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #menu-button {
+            cursor: pointer;
+            font-family: 'Futura';
+            background-color: #ffeeaa;
+            color: #212427;
+            padding: 10px;
+            font-size: xx-large;
+            border: none;
+            position: absolute;
+            top: 24px;
+            right: 24px;
+        }
+
+        #menu-button:focus,
+        #menu-button:hover {
+            background-color: #212427;
+            color: white;
+        }
+
+        #menu-icon div {
+            width: 30px;
+            height: 3px;
+            background-color: #212427;
+            margin: 5px 0;
+            border-radius: 2px;
+        }
+
+        nav {
+            background-color: #ffffff;
+            position: absolute;
+            top: 72px;
+            left: 32px;
+            z-index: 1;
+            font-size: 20px;
+            background: repeating-linear-gradient(
+                100deg,
+                #fff,
+                #fff 2px,
+                #ffeeaa 2px,
+                #ffeeaa 3px
+            );
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s, padding 0.3s; /* Added padding transition */
+            padding: 0; /* Initial padding */
+        }
+
+        nav.active {
+            height: auto;
+            padding: 12px; /* Add padding when active */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin-bottom: 10px;
+        }
+
+        nav a {
+            text-decoration: none; /* Remove underlines from links */
+            color: #212427; /* Set link color */
+        }
+
+        nav a:hover {
+            color: #96c0ad; /* Set link color on hover */
+        }
+
+        nav a:active {
+            color: #96c0ad; /* Set link color when active */
+        }
+
+        .social-icons {
+            position: fixed;
+            bottom: 20px;
+            left: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .social-icon {
+            margin-bottom: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            nav.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="menu-button" aria-label="Toggle Menu" role="button">future<span style="color: #96c0ad;">nature</span>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="javascript:void(0);" onclick="loadContent('neophytes.html')">Neophytes</a></li>
+            <li><a href="javascript:void(0);" onclick="loadContent('habitat.html')">Habitat</a></li>
+            <li><a href="javascript:void(0);" onclick="loadContent('foraging.html')">Foraging</a></li>
+            <li><a href="javascript:void(0);" onclick="loadContent('medicine.html')">Medicine</a></li>
+        </ul>
+    </nav>
+    <div class="social-icons">
+        <!-- Add your social media icons or links here -->
+    </div>
+    <div id="content-container">
+        <!-- Content loaded from linked pages will be displayed here -->
+    </div>
+
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const nav = document.querySelector('nav');
+        const contentContainer = document.getElementById('content-container');
+
+        let isOpen = false;
+
+        function loadContent(url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    contentContainer.innerHTML = data;
+                    isOpen = !isOpen;
+                    nav.classList.toggle('active');
+                });
+        }
+
+        menuButton.addEventListener('click', () => {
+            if (!isOpen) {
+                const buttonRect = menuButton.getBoundingClientRect();
+                nav.style.top = `${buttonRect.bottom}px`;
+                nav.style.left = `${buttonRect.left}px`;
+                nav.style.height = `${nav.scrollHeight}px`;
+                nav.style.padding = '12px'; /* Add padding when active */
+            } else {
+                nav.style.height = '0';
+                nav.style.padding = '0'; /* Reset padding when not active */
+            }
+            isOpen = !isOpen;
+        });
+    </script>
+</body>
+</html>
