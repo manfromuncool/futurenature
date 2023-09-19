@@ -1,1 +1,134 @@
-Hello.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>futurenature</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 16px;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #logo {
+            font-family: 'Futura', sans-serif;
+            font-weight: normal;
+            font-size: 24px;
+        }
+
+        #menu-icon {
+            cursor: pointer;
+        }
+
+        #menu-icon div {
+            width: 30px;
+            height: 3px;
+            background-color: #000000;
+            margin: 5px 0;
+            border-radius: 2px;
+        }
+
+nav {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    position: absolute;
+    top: 60px;
+    right: -100%; /* Initially off-screen */
+    z-index: 1;
+    transition: right 0.3s ease-in-out;
+    font-size: 20px;
+}
+
+nav.active {
+    right: 0; /* Slide in */
+}
+        
+        nav a {
+            padding: 15px;
+            text-decoration: none;
+            color: #000000;
+        }
+        
+        ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+        .social-icons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .social-icon {
+            margin-bottom: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            #menu-icon {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <span style="color: #693f52;">future</span><span style="color: #96c0ad;">nature</span>
+        </div>
+        <div id="menu-icon">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+    <nav>
+        <a href="#">
+            <h2>Future</h2>
+            <ul>
+                <li>Neophytes</li>
+                <li>Proxies</li>
+            </ul>
+        </a>
+        <a href="#">
+            <h2>Nature</h2>
+            <ul>
+                <li>Foraging</li>
+                <li>Dying</li>
+            </ul>
+        </a>
+    </nav>
+    <div class="social-icons">
+    </div>
+
+    <script>
+        const menuIcon = document.getElementById('menu-icon');
+        const nav = document.querySelector('nav');
+
+        menuIcon.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
